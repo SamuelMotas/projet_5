@@ -4,7 +4,7 @@ const urlParams = new URLSearchParams(queryString)
 const id = urlParams.get("id")
 
 // Appel de l'API --------
-fetch(`http://localhost:3000/api/products/${id}`)// En rajoutant la variable urlID on demande uniquement le produit lié à l'ID
+fetch(`http://localhost:3000/api/products/${id}`)// En rajoutant la variable id on demande uniquement le produit lié à l'ID
     .then(res => res.json())
     .then(res => handleData(res))
 
