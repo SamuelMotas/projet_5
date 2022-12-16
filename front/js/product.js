@@ -8,7 +8,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
     .then(res => handleData(res))
 
 function handleData(couch) {
-    const { altTxt, colors, description, imageUrl, name, price } = couch
+    const { altTxt, colors, description, imageUrl, name, price } = couch 
 
     makeImage(imageUrl, altTxt)
     makeTitle(name)
