@@ -27,27 +27,26 @@ function makeImage(imageUrl, altTxt) {
 
 function makeTitle(name) {
     const h1 = document.querySelector("#title")
-    if (h1 != null) h1.textContent = name
+    h1.textContent = name
 }
 
 function makePrice(price) {
     const span = document.querySelector("#price")
-    if (span != null) span.textContent = price
+    span.textContent = price
 }
 
 function makeDescription(description) {
     const p = document.querySelector("#description")
-    if (p != null) p.textContent = description
+    p.textContent = description
 }
 
 function makeColors(colors) {
     const select = document.querySelector("#colors")
-    if (select != null) {
-        colors.forEach((color) => {
-            const option = document.createElement("option")
-            option.value = color
-            option.textContent = color
-            select.appendChild(option)
-        })
-    }
+    colors.forEach((color) => {
+        const option = document.createElement("option")
+        option.value = color
+        option.textContent = color
+        select.appendChild(option)
+    })
+
 }
