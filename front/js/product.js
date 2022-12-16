@@ -1,14 +1,15 @@
+// Déclaration des paramètres URL à récupérer pour l'id --------
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
 const id = urlParams.get("id")
 
-
-fetch(`http://localhost:3000/api/products/${id}`)
+// Appel de l'API --------
+fetch(`http://localhost:3000/api/products/${id}`)// En rajoutant la variable urlID on demande uniquement le produit lié à l'ID
     .then(res => res.json())
     .then(res => handleData(res))
 
 function handleData(couch) {
-    const { altTxt, colors, description, imageUrl, name, price } = couch 
+    const { altTxt, colors, description, imageUrl, name, price } = couch // Les options seront sélectionnées en fonction de l'API demandée
 
     makeImage(imageUrl, altTxt)
     makeTitle(name)
@@ -16,6 +17,8 @@ function handleData(couch) {
     makeDescription(description)
     makeColors(colors)
 }
+
+// Mise en place d'éléments permettant l'ajout d'articles au panier ---------------------------------------------------------------------------------------------
 
 function makeImage(imageUrl, altTxt) {
     const image = document.createElement("img")
