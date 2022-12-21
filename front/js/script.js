@@ -65,7 +65,7 @@ function makeH3(name) {
     return h3
 }
 function makeParagraph(description) {
-    const p = document.createElement("p")
+    const p = document.createElement("p") // Function pour l'élément description et sa classe
     p.textContent = description
     p.classList.add("productDescription")
     return p

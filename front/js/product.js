@@ -18,7 +18,7 @@ function handleData(couch) {
     imgUrl = imageUrl
     altText = altTxt
     articleName = name
-    makeImage(imageUrl, altTxt)
+    makeImage(imageUrl, altTxt) //on declare les variables
     makeTitle(name)
     makePrice(price)
     makeDescription(description)
