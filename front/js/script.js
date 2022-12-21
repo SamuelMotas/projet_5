@@ -1,12 +1,12 @@
 // Appel de l'API ----------
 fetch("http://localhost:3000/api/products")  // On appelle la méthode fetch avec l'URL de notre API comme argument
     .then((res) => res.json()) // Fetch nous renvoie une promise, si l'API répond then() sera exécutée, ici pour récupérer le résultat via un JSON
-    
+
     .then((data) => { // Et ensuite le résultat sera manipulé afin d'être exploitable pour notre application 
-       for (let i = 0; i < data.length; i++){
-        // Boucle crée pour itérer chaque produit disponible
-        addProducts(data[i])// Création d'une nouvelle instance afin de pouvoir récuperer chaque paramètres de nos produits,et pouvoir les réutiliser  
-       }
+        for (let i = 0; i < data.length; i++) {
+            // Boucle crée pour itérer chaque produit disponible
+            addProducts(data[i])// Création d'une nouvelle instance afin de pouvoir récuperer chaque paramètres de nos produits,et pouvoir les réutiliser  
+        }
     })
 
 function addProducts(couch) {
@@ -16,12 +16,13 @@ function addProducts(couch) {
     const name = couch.name
     const description = couch.description
 
-
+    // on déclare les variables
     const anchor = makeAnchor(id)
     const image = makeImage(imageUrl, altTxt)
     const article = makeArticle()
     const h3 = makeH3(name)
     const p = makeParagraph(description)
+
 
     article.appendChild(image)
     article.appendChild(h3)
@@ -30,9 +31,11 @@ function addProducts(couch) {
     appendChildren(anchor)
 }
 
+
+// Mise en placec permettant d'afficher les articles
 function makeAnchor(id) {
     const anchor = document.createElement("a")
-    anchor.href = "./product.html?id=" + id 
+    anchor.href = "./product.html?id=" + id
     return anchor
 }
 
