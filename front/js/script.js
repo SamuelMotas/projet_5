@@ -32,9 +32,9 @@ function addProducts(couch) {
 }
 
 
-// Mise en placec permettant d'afficher les articles
+// Mise en place d'éléments permettant d'afficher les articles
 function makeAnchor(id) {
-    const anchor = document.createElement("a")
+    const anchor = document.createElement("a") 
     anchor.href = "./product.html?id=" + id
     return anchor
 }
@@ -46,7 +46,7 @@ function appendChildren(anchor) {
 }
 
 function makeImage(imageUrl, altTxt) {
-    const image = document.createElement("img")
+    const image = document.createElement("img") //Function pour l'élément image et son texte
     image.src = imageUrl
     image.alt = altTxt
     return image
@@ -54,12 +54,12 @@ function makeImage(imageUrl, altTxt) {
 }
 
 function makeArticle() {
-    const article = document.createElement("article")
+    const article = document.createElement("article") //Function pour l'élément article
     return article
 }
 
 function makeH3(name) {
-    const h3 = document.createElement("h3")
+    const h3 = document.createElement("h3") //Function pour le h3 et sa classe
     h3.textContent = name
     h3.classList.add("productName")
     return h3
