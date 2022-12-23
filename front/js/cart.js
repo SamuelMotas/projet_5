@@ -1,8 +1,7 @@
 const cart = []
 
-
 retrieveItemsFromCache()
-cart.forEach(item => displayItem(item))
+
 
 
 /* altTxt: "Photo d'un canapé gris, trois places"
@@ -18,7 +17,22 @@ function retrieveItemsFromCache() {
     for (let i = 0; i < numberOfItems; i++) {
         const item = localStorage.getItem(localStorage.key(i)) || "" //on récupère le item
         const itemObject = JSON.parse(item)
-        cart.push(itemObject)
+        fetch(`http://localhost:3000/api/products/${itemObject.id}`) // En rajoutant la variable id on demande uniquement le produit lié à l'ID
+            .then(res => res.json())
+            .then(couchdata => {
+                const couch = {
+                    id: itemObject.id,
+                    color: itemObject.color,
+                    quantity: itemObject.quantity,
+                    price: couchdata.price,
+                    imageUrl: couchdata.imageUrl,
+                    altTxt: couchdata.altTxt,
+                    name: couchdata.name
+                }
+                cart.push(couch)
+                 displayItem(couch)
+            })
+console.log(displayItem)
     }
 }
 
@@ -49,7 +63,7 @@ function makeCartContent(item) {
 function makeSettings(item) {
     const settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
- 
+
     addQuantityToSettings(settings, item)
     return settings
 }
@@ -67,7 +81,7 @@ function addQuantityToSettings(settings, item) {
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
-    settings.apppendChild(input)
+    settings.appendChild(input)
 }
 
 function makeDescription(item) {
@@ -77,7 +91,7 @@ function makeDescription(item) {
     const h2 = document.createElement("h2")
     h2.textContent = item.name
     const p = document.createElement("p")
-    package.textContent = item.color;
+    p.textContent = item.color;
     const p2 = document.createElement("p")
     p2.textContent = item.price + " €";
 

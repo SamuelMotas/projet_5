@@ -7,6 +7,7 @@ fetch("http://localhost:3000/api/products")  // On appelle la méthode fetch ave
             // Boucle crée pour itérer chaque produit disponible
             addProducts(data[i])// Création d'une nouvelle instance afin de pouvoir récuperer chaque paramètres de nos produits,et pouvoir les réutiliser  
         }
+        
     })
 
 function addProducts(couch) {
@@ -23,7 +24,7 @@ function addProducts(couch) {
     const h3 = makeH3(name)
     const p = makeParagraph(description)
 
-
+    // 
     article.appendChild(image)
     article.appendChild(h3)
     article.appendChild(p)
@@ -34,9 +35,10 @@ function addProducts(couch) {
 
 // Mise en place d'éléments permettant d'afficher les articles
 function makeAnchor(id) {
-    const anchor = document.createElement("a") 
+    const anchor = document.createElement("a") //on récupere l'id d'un produit
     anchor.href = "./product.html?id=" + id
     return anchor
+
 }
 
 function appendChildren(anchor) {
@@ -47,7 +49,7 @@ function appendChildren(anchor) {
 
 function makeImage(imageUrl, altTxt) {
     const image = document.createElement("img") //Function pour l'élément image et son texte
-    image.src = imageUrl
+    image.src = imageUrl //On récupere les images et les textes
     image.alt = altTxt
     return image
 
@@ -56,13 +58,15 @@ function makeImage(imageUrl, altTxt) {
 function makeArticle() {
     const article = document.createElement("article") //Function pour l'élément article
     return article
+    
 }
 
 function makeH3(name) {
     const h3 = document.createElement("h3") //Function pour le h3 et sa classe
     h3.textContent = name
-    h3.classList.add("productName")
+    h3.classList.add("productName") //On récupère le nom des produits
     return h3
+
 }
 function makeParagraph(description) {
     const p = document.createElement("p") // Function pour l'élément description et sa classe

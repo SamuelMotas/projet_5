@@ -2,13 +2,14 @@
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
 const id = urlParams.get("id")
+
 if (id != null) {
     let itemPrice = 0
     let imgUrl, altText, articleName
 }
 
 // Appel de l'API --------
-fetch(`http://localhost:3000/api/products/${id}`) // En rajoutant la variable id on demande uniquement le produit lié à l'ID
+fetch(`http://localhost:3000/api/products/${id}`) // En rajoutant la variable id on demande uniquement le produit lié à l'ID (le canapé)
     .then(res => res.json())
     .then(res => handleData(res))
 
@@ -64,32 +65,37 @@ const button = document.querySelector("#addToCart")
 button.addEventListener("click", handleClick)
 
 
+
 function handleClick() {
     const color = document.querySelector("#colors").value
     const quantity = document.querySelector("#quantity").value //Il va lire le color et le quantity depuis le formulaire
 
-    if (isOrderInvalid(color, quantity)) return;
+    if (isOrderInvalid(color, quantity))
+        return;
+
     saveOrder(color, quantity)
     redirectToCart()
 }
 
 function saveOrder(color, quantity) {
+
     const data = {
         id: id,
         color: color,
         quantity: Number(quantity),
-        price: itemPrice,
-        imageUrl: imgUrl,
-        altTxt: altText,
-        name: articleName
+
     }
     localStorage.setItem(id, JSON.stringify(data))
+
 }
 
 function isOrderInvalid(color, quantity) {
     if (color == null || color === "" || quantity == null || quantity == 0) {
         alert("please select a color and quantity") //Envoie un message si les conditions ne sont pas remplies
         return true
+    }
+    else {
+        return false
     }
 }
 
