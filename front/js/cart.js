@@ -1,4 +1,4 @@
-const cart = []
+const cart = [] //Variable GLOBALE
 
 retrieveItemsFromCache()
 
@@ -30,9 +30,8 @@ function retrieveItemsFromCache() {
                     name: couchdata.name
                 }
                 cart.push(couch)
-                 displayItem(couch)
+                displayItem(couch)
             })
-console.log(displayItem)
     }
 }
 
@@ -45,8 +44,25 @@ function displayItem(item) {
     article.appendChild(cardItemContent)
 
     displayArticle(article) // on a fait un article et on l'a affiché
+    displayTotalQuantity()
+    displayTotalPrice()
 }
 
+function displayTotalQuantity() {
+    const totalQuantity = document.querySelector("#totalQuantity")
+    const total = cart.reduce((total, item) => total + item.quantity, 0)
+    totalQuantity.textContent = total
+}
+
+function displayTotalPrice() {
+    let total = 0
+    const totalPrice = document.querySelector("#totalPrice")
+    cart.forEach((item) => {
+        const totalUnitPrice = item.price * item.quantity
+        total += totalUnitPrice
+    })
+    totalPrice.textContent = total
+}
 
 function makeCartContent(item) {
     const cardItemContent = document.createElement("div")
@@ -63,9 +79,20 @@ function makeCartContent(item) {
 function makeSettings(item) {
     const settings = document.createElement("div")
     settings.classList.add("cart__item__content__settings")
-
+    addDeleteToSettings(settings)
     addQuantityToSettings(settings, item)
     return settings
+}
+
+
+// On déclare  la function qui permet de supprimer l'article
+function addDeleteToSettings(settings) {
+    const div = document.createElement("div")
+    div.classList.add("cart__item__content__settings__delete")
+    const p = document.createElement("p")
+    p.textContent = "Supprimer"
+    div.appendChild(p)
+    settings.appendChild(div)
 }
 
 function addQuantityToSettings(settings, item) {
@@ -81,7 +108,9 @@ function addQuantityToSettings(settings, item) {
     input.min = "1"
     input.max = "100"
     input.value = item.quantity
-    settings.appendChild(input)
+
+    quantity.appendChild(input)
+    settings.appendChild(quantity)
 }
 
 function makeDescription(item) {
