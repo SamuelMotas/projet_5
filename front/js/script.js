@@ -58,7 +58,6 @@ function makeImage(imageUrl, altTxt) {
 //Function pour l'élément article
 function makeArticle() {
     const article = document.createElement("article") 
-    console.log(article)
     return article
 }
 
