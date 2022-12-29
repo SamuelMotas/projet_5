@@ -2,13 +2,6 @@ const cart = [] //on recupere chaque produit ajouté au panier
 retrieveItemsFromCache()
 
 
-/* altTxt: "Photo d'un canapé gris, trois places"
-color: "Purple"
-id: "8906dfda133f4c20a9d0e34f18adcf06"
-imageUrl: "http://localhost:3000/images/kanap05.jpeg"
-price: 2249
-quantity: 1 
-name: "caa" */
 
 function retrieveItemsFromCache() {
     const numberOfItems = localStorage.length
@@ -50,7 +43,7 @@ function displayItem(item) {
 function displayTotalQuantity() {
     const totalQuantity = document.querySelector("#totalQuantity")
     let total = 0
-    for (let i = 0; i < cart.length; i++){
+    for (let i = 0; i < cart.length; i++) {
         total = cart[i].quantity + total
     }
     totalQuantity.textContent = total
@@ -64,7 +57,7 @@ function displayTotalPrice() {
         const totalUnitPrice = item.price * item.quantity
         total += totalUnitPrice
     })*/
-    for (let i = 0; i < cart.length; i++){
+    for (let i = 0; i < cart.length; i++) {
         const totalUnitPrice = cart[i].price * cart[i].quantity
         total += totalUnitPrice
     }
@@ -122,7 +115,7 @@ function deleteArticleFromPage(item) {
 
 function deleteItem(item) {
     const itemToDelete = cart.findIndex((product) => product.id === item.id && product.color === item.color)
-    
+
     cart.splice(itemToDelete, 1)
     displayTotalPrice()
     displayTotalQuantity()
@@ -135,13 +128,13 @@ function addDeleteToSettings(settings, item) {
     const div = document.createElement("div")
     div.classList.add("cart__item__content__settings__delete")
     div.addEventListener("click", () => deleteItem(item))//permet de supprimer le produit quand on clique sur "supprimer"
-    
+
     const p = document.createElement("p")
     p.textContent = "Supprimer"
     div.appendChild(p)
     settings.appendChild(div)
 }
--
+
 
 function updatePriceQuantity(id, newValue, item) {
     const itemToUpdate = cart.find(item => item.id === id)
@@ -175,7 +168,7 @@ function makeDescription(item) {
     const p2 = document.createElement("p")//on créé l'élément p qui est le prix du produit dans le DOM
     p2.textContent = item.price + " €";
 
-    //on utilise cette méthode pour ajouter un noeud en tant que dernier enfant de l'élément
+    //on utilise ces méthode pour ajouter un noeud en tant que dernier enfant de l'élément
     description.appendChild(h2)
     description.appendChild(p)
     description.appendChild(p2)
@@ -204,3 +197,4 @@ function makeImageDiv(item) {
     div.appendChild(image)
     return div
 }
+
