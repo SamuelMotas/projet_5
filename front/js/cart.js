@@ -1,7 +1,9 @@
 const cart = [] //on recupere chaque produit ajouté au panier
+
 retrieveItemsFromCache()
 
-
+const orderButton = document.querySelector("#order")
+orderButton.addEventListener("click", (e) => submitForm(e))
 
 function retrieveItemsFromCache() {
     const numberOfItems = localStorage.length
@@ -198,3 +200,79 @@ function makeImageDiv(item) {
     return div
 }
 
+function submitForm(e) {
+    e.preventDefault()
+    if (cart.length === 0) {
+        alert("SVP sélectionnez un produit a acheté") //envoie un mesage d'alerte si le client n'a pa sélectionné de canapé
+        return
+    }
+
+    if (isFormInvalid()) return
+    if (isEmailInvalid()) return
+
+    const body = makeRequestBody()
+    fetch("http://localhost:3000/api/products/order", {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+}
+
+function isEmailInvalid() {
+    const email = document.querySelector("#email").value
+    const regex = /^[A-Za-z0-9+_.-]+@(.+)$/ //permet de verifier si l'email est valide
+    if (regex.test(email) === false) {
+        alert("SVP Entrez votre email valide") //Envoie un mesage si le champs email n'est pas remplis
+        return true
+    }
+    return false
+}
+
+function isFormInvalid() {
+    const form = document.querySelector(".cart__order__form")
+    const inputs = form.querySelectorAll("input") //pour chaque input si la value est null, il va envoyer un message d'alert et faire un return
+    inputs.forEach((input) => {
+        if (input.value === "") {
+            alert("SVP Remplissez les champs")
+            return true //Le form est invalide
+        }
+        return false //le form est valide
+    })
+}
+
+function makeRequestBody() {
+    const form = document.querySelector(".cart__order__form")
+    const firstName = form.elements.firstName.value
+    const lastName = form.elements.lastName.value
+    const address = form.elements.address.value
+    const city = form.elements.city.value
+    const email = form.elements.email.value
+    const body = {
+        contact: {
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            city: city,
+            email: email
+        },
+        products: getIdsFromCache()
+    }
+    console.log(body)
+    return body
+}
+
+function getIdsFromCache() {
+    const numberOfProducts = localStorage.length
+    const ids = []
+    for (let i = 0; i < numberOfProducts; i++) {
+        const key = localStorage.key(i)
+        console.log(key)
+        const id = key.split("-")[0]
+        ids.push(id)
+    }
+    return ids
+}
