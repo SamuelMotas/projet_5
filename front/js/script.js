@@ -33,7 +33,6 @@ function addProducts(couch) {
 
 
 // Mise en place d'éléments permettant d'afficher les articles
-
 function makeAnchor(id) {
     const anchor = document.createElement("a") //on récupere l'id d'un produit
     anchor.href = "./product.html?id=" + id
