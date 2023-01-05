@@ -28,6 +28,7 @@ function retrieveItemsFromCache() {
     }
 }
 
+//
 function displayItem(item) {
     const article = makeArticle(item)  // on fait un article
     const imageDiv = makeImageDiv(item) //on fabrique une imageDiv
@@ -203,7 +204,7 @@ function makeImageDiv(item) {
 function submitForm(e) {
     e.preventDefault()
     if (cart.length === 0) {
-        alert("SVP sélectionnez un produit a acheté") //envoie un mesage d'alerte si le client n'a pa sélectionné de canapé
+        alert("SVP sélectionnez un produit àacheter") //envoie un mesage d'alerte si le client n'a pa sélectionné de canapé
         return
     }
 
@@ -236,25 +237,55 @@ function isEmailInvalid() {
     return false
 }
 
+//Modifier 
 function isFormInvalid() {
-    const form = document.querySelector(".cart__order__form")
-    const inputs = form.querySelectorAll("input") //pour chaque input si la value est null, il va envoyer un message d'alert et faire un return
-    inputs.forEach((input) => {
-        if (input.value === "") {
-            alert("SVP Remplissez les champs")
-            return true //Le form est invalide
-        }
-        return false //le form est valide
-    })
+    const firstName = document.querySelector("#firstName")
+    if (firstName.value === "") {
+        alert("Attention, le champ prénom n'est pas rempli")
+        return true;
+    }
+
+    const lastName = document.querySelector("#lastName")
+    if (lastName.value === "") {
+        alert("Attention, le champ nom n'est pas rempli")
+        return true;
+    }
+
+    const address = document.querySelector("#address")
+    if(address.value === "") {
+      alert("Attention, le champ nom n'est pas rempli")
+      return true;
+    }
+
+    const city = document.querySelector("#city")
+    if(city.value === "") {
+      alert("Attention, le champ nom n'est pas rempli")
+      return true;
+    }
+
+    const email = document.querySelector("#email")
+    if(email.value === "") {
+      alert("Attention, le champ nom n'est pas rempli")
+      return true;
+    }
+     
+    /*const form = document.querySelector(".cart__order__form")
+     const inputs = form.querySelectorAll("input") //pour chaque input si la value est null, il va envoyer un message d'alert et faire un return
+     inputs.forEach((input) => {
+         if (input.value === "") {
+             alert("SVP Remplissez les champs")
+             return true //Le form est invalide
+         }
+         return false //le form est valide
+     })*/
 }
 
 function makeRequestBody() {
-    const form = document.querySelector(".cart__order__form")
-    const firstName = form.elements.firstName.value
-    const lastName = form.elements.lastName.value
-    const address = form.elements.address.value
-    const city = form.elements.city.value
-    const email = form.elements.email.value
+    const firstName = document.querySelector("#firstName").value
+    const lastName = document.querySelector("#lastName").value
+    const address = document.querySelector("#address").value
+    const city = document.querySelector("#city").value
+    const email = document.querySelector("#email").value
     const body = {
         contact: {
             firstName: firstName,
@@ -273,9 +304,9 @@ function getIdsFromCache() {
     const numberOfProducts = localStorage.length
     const ids = []
     for (let i = 0; i < numberOfProducts; i++) {
-        const key = localStorage.key(i)
-        console.log(key)
-        const id = key.split("-")[0]
+        const item = localStorage.getItem(localStorage.key(i)) || "" //on récupère le item avec le localStorage
+        const itemObject = JSON.parse(item)
+        const id = itemObject.id
         ids.push(id)
     }
     return ids
