@@ -24,10 +24,12 @@ function handleData(couch) {
     makePrice(price)
     makeDescription(description)
     makeColors(colors)
+    
 }
 
 // Mise en place d'éléments permettant l'ajout d'articles au panier ---------------------------------------------------------------------------------------------
 
+//affiche l'aimge du produit
 function makeImage(imageUrl, altTxt) {
     const image = document.createElement("img")
     image.src = imageUrl
@@ -36,21 +38,25 @@ function makeImage(imageUrl, altTxt) {
     parent.appendChild(image)
 }
 
+//affiche le nom du produit
 function makeTitle(name) {
     const h1 = document.querySelector("#title")
     h1.textContent = name
 }
 
+//fonction affichant le prix
 function makePrice(price) {
     const span = document.querySelector("#price")
     span.textContent = price
 }
 
+//affiche la descritpion du produit
 function makeDescription(description) {
     const p = document.querySelector("#description")
     p.textContent = description
 }
 
+//fonction permettant de sélectionner une couleur
 function makeColors(colors) {
     const select = document.querySelector("#colors")
     colors.forEach((color) => {
@@ -61,22 +67,22 @@ function makeColors(colors) {
     })
 }
 
-const button = document.querySelector("#addToCart")
-button.addEventListener("click", handleClick)
+const button = document.querySelector("#addToCart") //affiche le bouton "ajouter au panier"
+button.addEventListener("click", handleClick) //on créé la fonction permettant de créer un bouton cliquable
 
-
-
+//function permettant de rendre cliquable le boutton "ajouter au panier"
 function handleClick() {
     const color = document.querySelector("#colors").value
     const quantity = document.querySelector("#quantity").value //Il va lire le color et le quantity depuis le formulaire
 
-    if (isOrderInvalid(color, quantity))
+    if (isOrderInvalid(color, quantity)) //si les conditions sont remplis
         return;
 
     saveOrder(color, quantity)
     redirectToCart()
 }
 
+//permet de sauvegarder les produits dans le localStorage
 function saveOrder(color, quantity) {
 const key = `${id}-${color}`
     const data = {
@@ -85,9 +91,9 @@ const key = `${id}-${color}`
         quantity: Number(quantity),
     }
     localStorage.setItem(key, JSON.stringify(data))
-
 }
 
+//fonction permettant d'envoyer une alerte si le client n'a pas sélectionner de couleur ou quantité
 function isOrderInvalid(color, quantity) {
     if (color == null || color === "" || quantity == null || quantity == 0) {
         alert("please select a color and quantity") //Envoie un message si les conditions ne sont pas remplies
@@ -98,6 +104,7 @@ function isOrderInvalid(color, quantity) {
     }
 }
 
+//Fonction permettant d'aller sur le lien du panier
 function redirectToCart() {
     window.location.href = "cart.html" //Redirige vers le panier (carte.html)
 }

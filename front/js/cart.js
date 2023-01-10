@@ -204,7 +204,7 @@ function makeImageDiv(item) {
 function submitForm(e) {
     e.preventDefault()
     if (cart.length === 0) {
-        alert("SVP sélectionnez un produit àacheter") //envoie un mesage d'alerte si le client n'a pa sélectionné de canapé
+        alert("SVP sélectionnez un produit à acheter") //envoie un mesage d'alerte si le client n'a pa sélectionné de canapé
         return
     }
 
@@ -253,31 +253,21 @@ function isFormInvalid() {
 
     const address = document.querySelector("#address")
     if(address.value === "") {
-      alert("Attention, le champ nom n'est pas rempli")
+      alert("Attention, le champ adresse n'est pas rempli")
       return true;
     }
 
     const city = document.querySelector("#city")
     if(city.value === "") {
-      alert("Attention, le champ nom n'est pas rempli")
+      alert("Attention, le champ ville n'est pas rempli")
       return true;
     }
 
-    const email = document.querySelector("#email")
+   const email = document.querySelector("#email")
     if(email.value === "") {
-      alert("Attention, le champ nom n'est pas rempli")
+      alert("Attention, le champ email n'est pas rempli")
       return true;
     }
-     
-    /*const form = document.querySelector(".cart__order__form")
-     const inputs = form.querySelectorAll("input") //pour chaque input si la value est null, il va envoyer un message d'alert et faire un return
-     inputs.forEach((input) => {
-         if (input.value === "") {
-             alert("SVP Remplissez les champs")
-             return true //Le form est invalide
-         }
-         return false //le form est valide
-     })*/
 }
 
 function makeRequestBody() {

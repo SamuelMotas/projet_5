@@ -1,9 +1,8 @@
 // Appel de l'API ----------
 fetch("http://localhost:3000/api/products")  // On appelle la méthode fetch avec l'URL de notre API comme argument
     .then((res) => res.json()) // Fetch nous renvoie une promise, si l'API répond then() sera exécutée, ici pour récupérer le résultat via un JSON
-
     .then((data) => { // Et ensuite le résultat sera manipulé afin d'être exploitable pour notre application 
-        for (let i = 0; i < data.length; i++) {  // Boucle crée pour itérer chaque produit disponible
+        for (let i = 0; i < data.length; i++) {  // Boucle crée pour répéter chaque produit disponible
             addProducts(data[i])// Création d'une nouvelle instance afin de pouvoir récuperer chaque paramètres de nos produits,et pouvoir les réutiliser  
         }
     })
@@ -34,14 +33,14 @@ function addProducts(couch) {
 
 // Mise en place d'éléments permettant d'afficher les articles
 function makeAnchor(id) {
-    const anchor = document.createElement("a") // Crée un nouvel élément a et l'ajoute à la fin du corps du document
+    const anchor = document.createElement("a") // Crée un nouvel élément a et l'ajouter à la fin du corps du document
     anchor.href = "./product.html?id=" + id   //on récupere l'id d'un produit
     return anchor
 }
 
 //function permettant de récuperer tout ce qui est dans l'élément #item
 function appendChildren(anchor) {
-    const items = document.querySelector("#items")
+    const items = document.querySelector("#items") //on sélectionne l'élément #item
     items.appendChild(anchor)
 }
 
@@ -51,7 +50,7 @@ function makeImage(imageUrl, altTxt) {
     image.src = imageUrl                       //On récupere les images et les textes
     image.alt = altTxt
     return image
-   
+
 }
 
 //Function pour l'élément article
