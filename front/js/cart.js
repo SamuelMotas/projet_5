@@ -158,6 +158,7 @@ function deleteDataFromCache(item) {
     localStorage.removeItem(key)
 }
 
+//enregistre des produits dans le cache
 function saveNewDataToCache(item) {
     const dataToSave = JSON.stringify(item)
     //const key = `${item.id} + ${item.color}`
@@ -188,7 +189,7 @@ function displayArticle(article) {
     document.querySelector("#cart__items").appendChild(article)
 }
 
-
+//créé l'article
 function makeArticle(item) {
     const article = document.createElement("article")
     article.classList.add("cart__item")
@@ -216,7 +217,7 @@ function submitForm(e) {
         return
     }
 
-    if (isFormInvalid()) return
+    if (isFormInvalid()) return    //retour si le formulaire et les email snt invalides
     if (isEmailInvalid()) return
 
     const body = makeRequestBody()
@@ -300,6 +301,7 @@ function makeRequestBody() {
     return body
 }
 
+//affiche els produits dans le local storage
 function getIdsFromCache() {
     const numberOfProducts = localStorage.length
     const ids = []
