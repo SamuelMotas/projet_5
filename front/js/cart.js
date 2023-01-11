@@ -301,7 +301,7 @@ function makeRequestBody() {
     return body
 }
 
-//affiche els produits dans le local storage
+//affiche les produits dans le local storage
 function getIdsFromCache() {
     const numberOfProducts = localStorage.length
     const ids = []

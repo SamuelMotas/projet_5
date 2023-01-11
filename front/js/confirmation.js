@@ -8,12 +8,13 @@ function getOrderId() {
     return urlParams.get("orderId")
 }
 
-
+//affiche le numero de commande
 function displayOrderId(orderId) {
     const orderIdElement = document.getElementById("orderId")
     orderIdElement.textContent = orderId
 }
 
+//supprime les éléments du local storage après la validation de commande
 function removeAllCache() {
     const cache = window.localStorage
     cache.clear()
