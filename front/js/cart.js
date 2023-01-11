@@ -2,9 +2,11 @@ const cart = [] //on recupere chaque produit ajouté au panier
 
 retrieveItemsFromCache()
 
+//variable du bouton "Commander!"
 const orderButton = document.querySelector("#order")
 orderButton.addEventListener("click", (e) => submitForm(e))
 
+//fonction pour récuperer les produits du cache de la page product
 function retrieveItemsFromCache() {
     const numberOfItems = localStorage.length
     for (let i = 0; i < numberOfItems; i++) {
@@ -28,7 +30,7 @@ function retrieveItemsFromCache() {
     }
 }
 
-//
+//function permettant l'affichage des éléments
 function displayItem(item) {
     const article = makeArticle(item)  // on fait un article
     const imageDiv = makeImageDiv(item) //on fabrique une imageDiv
@@ -80,6 +82,7 @@ function makeCartContent(item) {
     return cardItemContent
 }
 
+//function permettant de gérer la quantité par produit
 function addQuantityToSettings(settings, item) {
     const quantity = document.createElement("div")
     quantity.classList.add("cart__item__content__settings__quantity")
@@ -109,6 +112,7 @@ function makeSettings(item) {
     return settings
 }
 
+//fonction permettant de supprimer l'article 
 function deleteArticleFromPage(item) {
     const articleToDelete = document.querySelector(
         `article[data-id="${item.id}"][data-color="${item.color}"]`
@@ -201,6 +205,7 @@ function makeImageDiv(item) {
     return div
 }
 
+//fonction permettant d'envoyer un message d'alerte si un produit n'est pas sélectionnet pour achat
 function submitForm(e) {
     e.preventDefault()
     if (cart.length === 0) {
