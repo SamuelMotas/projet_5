@@ -142,7 +142,7 @@ function addDeleteToSettings(settings, item) {
     settings.appendChild(div)
 }
 
-
+//function permettant de mettre à jour le prix quand on change la quantité de produit
 function updatePriceQuantity(id, newValue, item) {
     const itemToUpdate = cart.find(item => item.id === id)
     itemToUpdate.quantity = Number(newValue)
@@ -152,6 +152,7 @@ function updatePriceQuantity(id, newValue, item) {
     saveNewDataToCache(item)
 }
 
+//fonction permettant de supprimer un article du local storage
 function deleteDataFromCache(item) {
     const key = `${item.id}-${item.color}`
     localStorage.removeItem(key)
@@ -182,9 +183,11 @@ function makeDescription(item) {
     return description
 }
 
+//affiche l'article
 function displayArticle(article) {
     document.querySelector("#cart__items").appendChild(article)
 }
+
 
 function makeArticle(item) {
     const article = document.createElement("article")
@@ -205,7 +208,7 @@ function makeImageDiv(item) {
     return div
 }
 
-//fonction permettant d'envoyer un message d'alerte si un produit n'est pas sélectionnet pour achat
+//fonction permettant d'envoyer un message d'alerte si un produit n'est pas sélectionné pour achat
 function submitForm(e) {
     e.preventDefault()
     if (cart.length === 0) {
@@ -232,6 +235,7 @@ function submitForm(e) {
         .catch((err) => console.error(err)) //
 }
 
+//Message d'alert si l'email n'est pas valide
 function isEmailInvalid() {
     const email = document.querySelector("#email").value
     const regex = /^[A-Za-z0-9+_.-]+@(.+)$/ //permet de verifier si l'email est valide
@@ -242,7 +246,7 @@ function isEmailInvalid() {
     return false
 }
 
-//Modifier 
+//Mesage d'aletre si les champs du formulaire ne sont pas remplis
 function isFormInvalid() {
     const firstName = document.querySelector("#firstName")
     if (firstName.value === "") {
@@ -275,6 +279,7 @@ function isFormInvalid() {
     }
 }
 
+//fonction permettant de remplir le formulaire
 function makeRequestBody() {
     const firstName = document.querySelector("#firstName").value
     const lastName = document.querySelector("#lastName").value
