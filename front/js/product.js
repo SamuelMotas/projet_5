@@ -24,7 +24,7 @@ function handleData(couch) {
     makePrice(price)
     makeDescription(description)
     makeColors(colors)
-    
+
 }
 
 // Mise en place d'éléments permettant l'ajout d'articles au panier ---------------------------------------------------------------------------------------------
@@ -84,13 +84,21 @@ function handleClick() {
 
 //permet de sauvegarder les produits dans le localStorage
 function saveOrder(color, quantity) {
-const key = `${id}-${color}`
-    const data = {
-        id: id,
-        color: color,
-        quantity: Number(quantity),
+    const key = `${id}-${color}`
+    let oldProduct = localStorage.getItem(key)
+    if (oldProduct != null) {
+        oldProduct = JSON.parse(oldProduct)
+        oldProduct.quantity += Number(quantity)
+        localStorage.setItem(key, JSON.stringify(oldProduct))
     }
-    localStorage.setItem(key, JSON.stringify(data))
+    else {
+        const data = {
+            id: id,
+            color: color,
+            quantity: Number(quantity),
+        }
+        localStorage.setItem(key, JSON.stringify(data))
+    }
 }
 
 //fonction permettant d'envoyer une alerte si le client n'a pas sélectionner de couleur ou quantité

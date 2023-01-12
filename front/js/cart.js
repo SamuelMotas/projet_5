@@ -58,10 +58,6 @@ function displayTotalQuantity() {
 function displayTotalPrice() {
     let total = 0
     const totalPrice = document.querySelector("#totalPrice")
-    /*cart.forEach((item) => {
-        const totalUnitPrice = item.price * item.quantity
-        total += totalUnitPrice
-    })*/
     for (let i = 0; i < cart.length; i++) {
         const totalUnitPrice = cart[i].price * cart[i].quantity
         total += totalUnitPrice
