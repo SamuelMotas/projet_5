@@ -3,6 +3,10 @@ const queryString = window.location.search //id du produit séléctionné
 const urlParams = new URLSearchParams(queryString)
 const id = urlParams.get("id")//Renvoie la première valeur associée au paramètre de recherche donné
 
+/*if (id != null) {
+    let itemPrice = 0
+    let imgUrl, altText
+}*/
 
 // Appel de l'API --------
 fetch(`http://localhost:3000/api/products/${id}`) // En rajoutant la variable id on demande uniquement le produit lié à l'ID (le canapé)

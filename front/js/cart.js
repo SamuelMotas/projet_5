@@ -1,13 +1,13 @@
 const cart = [] //on recupere chaque produit ajouté au panier
 
-retrieveItemsFromCache()
+recupItemsDuCache()
 
 //variable du bouton "Commander!"
 const orderButton = document.querySelector("#order")
 orderButton.addEventListener("click", (e) => submitForm(e))
 
 //fonction pour récuperer les produits du cache de la page product
-function retrieveItemsFromCache() {
+function recupItemsDuCache() {
     const numberOfItems = localStorage.length
     for (let i = 0; i < numberOfItems; i++) {
         const item = localStorage.getItem(localStorage.key(i)) || "" //on récupère le item avec le localStorage
