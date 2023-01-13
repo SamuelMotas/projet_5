@@ -3,17 +3,13 @@ const queryString = window.location.search //id du produit séléctionné
 const urlParams = new URLSearchParams(queryString)
 const id = urlParams.get("id")//Renvoie la première valeur associée au paramètre de recherche donné
 
-/* if (id != null) {
-    let itemPrice = 0
-    let imgUrl, altText, articleName
-} */
 
 // Appel de l'API --------
 fetch(`http://localhost:3000/api/products/${id}`) // En rajoutant la variable id on demande uniquement le produit lié à l'ID (le canapé)
     .then(res => res.json())
-    .then(res => handleData(res))
+    .then(res => gestionData(res))
 
-function handleData(couch) {
+function gestionData(couch) {
     const { altTxt, colors, description, imageUrl, name, price } = couch // Les options seront sélectionnées en fonction de l'API demandée
     itemPrice = price
     imgUrl = imageUrl
@@ -29,7 +25,7 @@ function handleData(couch) {
 
 // Mise en place d'éléments permettant l'ajout d'articles au panier ---------------------------------------------------------------------------------------------
 
-//affiche l'aimge du produit
+//affiche l'image du produit
 function makeImage(imageUrl, altTxt) {
     const image = document.createElement("img")
     image.src = imageUrl
@@ -68,22 +64,22 @@ function makeColors(colors) {
 }
 
 const button = document.querySelector("#addToCart") //affiche le bouton "ajouter au panier"
-button.addEventListener("click", handleClick) //on créé la fonction permettant de créer un bouton cliquable
+button.addEventListener("click", boutonClique) //on ajoute un evenement qui se déclenche lorsque l'utilisateur clique sur le bouton
 
 //function permettant de rendre cliquable le boutton "ajouter au panier"
-function handleClick() {
+function boutonClique() {
     const color = document.querySelector("#colors").value
     const quantity = document.querySelector("#quantity").value //Il va lire le color et le quantity depuis le formulaire
 
-    if (isOrderInvalid(color, quantity)) //si les conditions sont remplis
+    if (commandeInvalide(color, quantity)) //si les conditions sont remplis
         return;
 
-    saveOrder(color, quantity)
+    saveCommande(color, quantity)
     redirectToCart()
 }
 
 //permet de sauvegarder les produits dans le localStorage
-function saveOrder(color, quantity) {
+function saveCommande(color, quantity) {
     const key = `${id}-${color}`
     let oldProduct = localStorage.getItem(key)
     if (oldProduct != null) {
@@ -101,8 +97,9 @@ function saveOrder(color, quantity) {
     }
 }
 
+
 //fonction permettant d'envoyer une alerte si le client n'a pas sélectionner de couleur ou quantité
-function isOrderInvalid(color, quantity) {
+function commandeInvalide(color, quantity) {
     if (color == null || color === "" || quantity == null || quantity == 0) {
         alert("please select a color and quantity") //Envoie un message si les conditions ne sont pas remplies
         return true
