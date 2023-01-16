@@ -4,7 +4,7 @@ fetch("http://localhost:3000/api/products")  // On appelle la méthode fetch ave
     .then((data) => { // Et ensuite le résultat sera manipulé afin d'être exploitable pour notre application 
         for (let i = 0; i < data.length; i++) {  // Boucle crée pour répéter chaque produit disponible
             ajoutProduit(data[i])// Création d'une nouvelle instance afin de pouvoir récuperer chaque paramètres de nos produits,et pouvoir les réutiliser  
-           // console.log("nombre de canape")
+           //console.log("nombre de canape")
         }
     })
 

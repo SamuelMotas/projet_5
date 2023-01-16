@@ -213,8 +213,8 @@ function submitForm(e) {
         return
     }
 
-    if (isFormInvalid()) return    //retour si le formulaire et les email snt invalides
-    if (isEmailInvalid()) return
+    if (formInvalid()) return    //retour si le formulaire et les email sont invalides
+    if (emailInvalid()) return
 
     const body = makeRequestBody()
     fetch("http://localhost:3000/api/products/order", {
@@ -233,7 +233,7 @@ function submitForm(e) {
 }
 
 //Message d'alert si l'email n'est pas valide
-function isEmailInvalid() {
+function emailInvalid() {
     const email = document.querySelector("#email").value
     const regex = /^[A-Za-z0-9+_.-]+@(.+)$/ //permet de verifier si l'email est valide
     if (regex.test(email) === false) {
@@ -244,7 +244,7 @@ function isEmailInvalid() {
 }
 
 //Mesage d'aletre si les champs du formulaire ne sont pas remplis
-function isFormInvalid() {
+function formInvalid() {
     const firstName = document.querySelector("#firstName")
     if (firstName.value === "") {
         alert("Attention, le champ prénom n'est pas rempli")

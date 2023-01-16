@@ -15,10 +15,7 @@ fetch(`http://localhost:3000/api/products/${id}`) // En rajoutant la variable id
 
 function gestionData(couch) {
     const { altTxt, colors, description, imageUrl, name, price } = couch // Les options seront sélectionnées en fonction de l'API demandée
-    itemPrice = price
-    imgUrl = imageUrl
-    altText = altTxt
-    articleName = name
+  
     makeImage(imageUrl, altTxt) //on declare les variables
     makeTitle(name)
     makePrice(price)
