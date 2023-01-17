@@ -213,8 +213,8 @@ function submitForm(e) {
         return
     }
 
-    if (formInvalid()) return    //retour si le formulaire et les email sont invalides
-    if (emailInvalid()) return
+    if (formInvalid()) return   //retour si le formulaire et les email sont invalides
+    //if (emailInvalid()) return
 
     const body = makeRequestBody()
     fetch("http://localhost:3000/api/products/order", {
@@ -233,7 +233,7 @@ function submitForm(e) {
 }
 
 //Message d'alert si l'email n'est pas valide
-function emailInvalid() {
+/*function emailInvalid() {
     const email = document.querySelector("#email").value
     const regex = /^[A-Za-z0-9+_.-]+@(.+)$/ //permet de verifier si l'email est valide
     if (regex.test(email) === false) {
@@ -241,7 +241,7 @@ function emailInvalid() {
         return true
     }
     return false
-}
+}*/
 
 //Mesage d'aletre si les champs du formulaire ne sont pas remplis
 function formInvalid() {
@@ -258,22 +258,29 @@ function formInvalid() {
     }
 
     const address = document.querySelector("#address")
-    if(address.value === "") {
-      alert("Attention, le champ adresse n'est pas rempli")
-      return true;
+    if (address.value === "") {
+        alert("Attention, le champ adresse n'est pas rempli")
+        return true;
     }
 
     const city = document.querySelector("#city")
-    if(city.value === "") {
-      alert("Attention, le champ ville n'est pas rempli")
-      return true;
+    if (city.value === "") {
+        alert("Attention, le champ ville n'est pas rempli")
+        return true;
     }
 
-   const email = document.querySelector("#email")
-    if(email.value === "") {
-      alert("Attention, le champ email n'est pas rempli")
-      return true;
+    /*const email = document.querySelector("#email")
+    if (email.value === "") {
+        alert("Attention, le champ email n'est pas rempli")
+        return true;
+    }*/
+    const email = document.querySelector("#email").value
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ //permet de verifier si l'email est valide
+    if (regex.test(email) === false) {
+        alert("SVP Entrez votre email valide") //Envoie un mesage si le champs email n'est pas remplis
+        return true
     }
+    return false
 }
 
 //fonction permettant de remplir le formulaire
