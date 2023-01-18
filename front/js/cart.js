@@ -248,7 +248,7 @@ function formInvalid() {
     const firstName = document.querySelector("#firstName")
     if (firstName.value === "") {
         alert("Attention, le champ prénom n'est pas rempli")
-        return true;
+        return true;    
     }
 
     const lastName = document.querySelector("#lastName")
@@ -269,7 +269,7 @@ function formInvalid() {
         return true;
     }
 
-    /*const email = document.querySelector("#email")
+   /* const email = document.querySelector("#email")
     if (email.value === "") {
         alert("Attention, le champ email n'est pas rempli")
         return true;

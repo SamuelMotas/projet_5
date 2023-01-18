@@ -21,7 +21,6 @@ function gestionData(couch) {
     makePrice(price)
     makeDescription(description)
     makeColors(colors)
-
 }
 
 // Mise en place d'éléments permettant l'ajout d'articles au panier ---------------------------------------------------------------------------------------------
