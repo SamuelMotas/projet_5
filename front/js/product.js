@@ -14,13 +14,12 @@ fetch(`http://localhost:3000/api/products/${id}`) // En rajoutant la variable id
     .then(res => gestionData(res))
 
 function gestionData(couch) {
-    const { altTxt, colors, description, imageUrl, name, price } = couch // Les options seront sélectionnées en fonction de l'API demandée
-  
-    makeImage(imageUrl, altTxt) //on declare les variables
-    makeTitle(name)
-    makePrice(price)
-    makeDescription(description)
-    makeColors(colors)
+     // Les options seront sélectionnées en fonction de l'API demandée
+    makeImage(couch.imageUrl, couch.altTxt) //on declare les variables
+    makeTitle(couch.name)
+    makePrice(couch.price)
+    makeDescription(couch.description)
+    makeColors(couch.colors)
 }
 
 // Mise en place d'éléments permettant l'ajout d'articles au panier ---------------------------------------------------------------------------------------------
@@ -82,12 +81,7 @@ function boutonClique() {
 function saveCommande(color, quantity) {
     const key = `${id}-${color}`
     let oldProduct = localStorage.getItem(key)
-    if (oldProduct != null) {
-        oldProduct = JSON.parse(oldProduct)
-        oldProduct.quantity += Number(quantity)
-        localStorage.setItem(key, JSON.stringify(oldProduct))
-    }
-    else {
+    if (oldProduct === null) {
         const data = {
             id: id,
             color: color,
@@ -95,6 +89,12 @@ function saveCommande(color, quantity) {
         }
         localStorage.setItem(key, JSON.stringify(data))
     }
+    else {
+        oldProduct = JSON.parse(oldProduct)
+        oldProduct.quantity += Number(quantity)
+        localStorage.setItem(key, JSON.stringify(oldProduct))
+    }
+
 }
 
 
