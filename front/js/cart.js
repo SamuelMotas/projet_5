@@ -286,11 +286,10 @@ function formInvalid() {
     }
 
     if (regex.test(email.value) === false) {
-        alert("SVP Entrez votre email valide") //Envoie un mesage si le champs email n'est pas remplis
+        emailError.textContent = ("Attention, le champ email n'est pas valide")
         return true
     }
     return false
-
 }
 
 //fonction permettant de remplir le formulaire

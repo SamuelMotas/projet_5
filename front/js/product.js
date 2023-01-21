@@ -11,9 +11,9 @@ const id = urlParams.get("id")//Renvoie la première valeur associée au paramè
 // Appel de l'API --------
 fetch(`http://localhost:3000/api/products/${id}`) // En rajoutant la variable id on demande uniquement le produit lié à l'ID (le canapé)
     .then(res => res.json())
-    .then(res => gestionData(res))
+    .then(res => ajoutProduit(res))
 
-function gestionData(couch) {
+function ajoutProduit(couch) {
      // Les options seront sélectionnées en fonction de l'API demandée
     makeImage(couch.imageUrl, couch.altTxt) //on declare les variables
     makeTitle(couch.name)
@@ -80,21 +80,21 @@ function boutonClique() {
 //permet de sauvegarder les produits dans le localStorage
 function saveCommande(color, quantity) {
     const key = `${id}-${color}`
-    let oldProduct = localStorage.getItem(key)
+    let oldProduct = localStorage.getItem(key) //lorsque on passe la clé, dans le localstorage
+    
     if (oldProduct === null) {
         const data = {
             id: id,
             color: color,
             quantity: Number(quantity),
         }
-        localStorage.setItem(key, JSON.stringify(data))
+        localStorage.setItem(key, JSON.stringify(data))//lorsqu'elle recevra  la clé et la valeur, elle ajoutera dans le local storage si elle existe déjà
     }
     else {
         oldProduct = JSON.parse(oldProduct)
         oldProduct.quantity += Number(quantity)
         localStorage.setItem(key, JSON.stringify(oldProduct))
     }
-
 }
 
 

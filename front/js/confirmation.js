@@ -4,6 +4,7 @@ removeAllCache()
 
 function getOrderId() {
     const queryString = window.location.search
+    //console.log(queryString)
     const urlParams = new URLSearchParams(queryString) //on récupere le urlParams du fichier product.js
     return urlParams.get("orderId")
 }
